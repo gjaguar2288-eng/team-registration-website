@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Team Registration</h1>
+            <p>Create and register your team</p>
+        </header>
+
+        <main>
+            <section class="registration-section">
+                <form id="teamForm" method="POST" action="/register-team">
+                    <div class="form-group">
+                        <label for="teamName">Team Name *</label>
+                        <input type="text" id="teamName" name="teamName" placeholder="Enter team name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamDescription">Team Description</label>
+                        <textarea id="teamDescription" name="teamDescription" placeholder="Describe your team" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sport">Sport *</label>
+                            <select id="sport" name="sport" required>
+                                <option value="">Select a sport</option>
+                                <option value="football">Football</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="baseball">Baseball</option>
+                                <option value="soccer">Soccer</option>
+                                <option value="volleyball">Volleyball</option>
+                                <option value="hockey">Hockey</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location *</label>
+                            <input type="text" id="location" name="location" placeholder="City, State" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="coachName">Coach Name *</label>
+                            <input type="text" id="coachName" name="coachName" placeholder="Coach full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="coachEmail">Coach Email *</label>
+                            <input type="email" id="coachEmail" name="coachEmail" placeholder="coach@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="coachPhone">Coach Phone *</label>
+                            <input type="tel" id="coachPhone" name="coachPhone" placeholder="(123) 456-7890" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="memberCount">Number of Members *</label>
+                            <input type="number" id="memberCount" name="memberCount" placeholder="e.g., 15" min="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Team Website</label>
+                        <input type="url" id="website" name="website" placeholder="https://example.com">
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="agree" name="agree" required>
+                        <label for="agree">I agree to the terms and conditions *</label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Register Team</button>
+                </form>
+            </section>
+
+            <section class="registered-teams">
+                <h2>Registered Teams</h2>
+                <div id="teamsList" class="teams-list">
+                    <p>No teams registered yet.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Team Registration System. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
