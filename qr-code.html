@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Registration - QR Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .qr-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        #qrCode {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .url-display {
+            background: white;
+            border: 2px solid #667eea;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #667eea;
+            word-break: break-all;
+        }
+        .btn-copy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        .instructions {
+            text-align: left;
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+        .instructions h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .instructions ol {
+            color: #555;
+            line-height: 1.8;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-container">
+        <h1>📱 Team Registration</h1>
+        <p>Scan this QR code to access the registration page</p>
+        
+        <div id="qrCode"></div>
+        
+        <div class="url-display" id="urlDisplay">
+            https://github.com/gjaguar2288-eng/team-registration-website
+        </div>
+        
+        <button class="btn-copy" onclick="copyToClipboard()">📋 Copy Repository Link</button>
+        
+        <div class="info">
+            <strong>ℹ️ Note:</strong> This QR code links to the GitHub repository. To scan and access the live website:
+            <ol style="text-align: left; margin-top: 10px;">
+                <li>Deploy the website to a hosting service (Heroku, Vercel, etc.)</li>
+                <li>Update the QR code with your domain URL</li>
+                <li>Share with team members to register</li>
+            </ol>
+        </div>
+
+        <div class="instructions">
+            <h3>🚀 Quick Setup Instructions:</h3>
+            <ol>
+                <li><strong>Clone the repository:</strong><br><code style="background: white; padding: 5px;">git clone https://github.com/gjaguar2288-eng/team-registration-website.git</code></li>
+                <li><strong>Install dependencies:</strong><br><code style="background: white; padding: 5px;">npm install</code></li>
+                <li><strong>Start the server:</strong><br><code style="background: white; padding: 5px;">npm start</code></li>
+                <li><strong>Open in browser:</strong><br><code style="background: white; padding: 5px;">http://localhost:3000</code></li>
+                <li><strong>Click "📱 Show QR Code" button to generate a live QR code</strong></li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Generate QR Code for GitHub repository
+        const gitHubUrl = 'https://github.com/gjaguar2288-eng/team-registration-website';
+        
+        new QRCode(document.getElementById('qrCode'), {
+            text: gitHubUrl,
+            width: 300,
+            height: 300,
+            colorDark: '#667eea',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        function copyToClipboard() {
+            const url = 'https://github.com/gjaguar2288-eng/team-registration-website';
+            navigator.clipboard.writeText(url).then(() => {
+                alert('✓ Repository link copied to clipboard!');
+            }).catch(() => {
+                alert('Failed to copy');
+            });
+        }
+    </script>
+</body>
+</html>
