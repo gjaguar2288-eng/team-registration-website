@@ -13,6 +13,62 @@ function setupFormListener() {
     });
 }
 
+// Toggle QR Code Modal
+function toggleQRCode() {
+    const modal = document.getElementById('qrModal');
+    modal.style.display = 'block';
+    generateQRCode();
+}
+
+// Close QR Code Modal
+function closeQRCode() {
+    const modal = document.getElementById('qrModal');
+    modal.style.display = 'none';
+}
+
+// Generate QR Code
+function generateQRCode() {
+    const qrContainer = document.getElementById('qrCodeContainer');
+    const qrUrlDisplay = document.getElementById('qrUrl');
+    
+    // Get current URL
+    const currentUrl = window.location.origin;
+    
+    // Clear previous QR code
+    qrContainer.innerHTML = '';
+    
+    // Generate QR code
+    new QRCode(qrContainer, {
+        text: currentUrl,
+        width: 300,
+        height: 300,
+        colorDark: '#667eea',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+    });
+    
+    // Display URL
+    qrUrlDisplay.textContent = currentUrl;
+}
+
+// Copy link to clipboard
+function copyLinkToClipboard() {
+    const url = window.location.origin;
+    navigator.clipboard.writeText(url).then(() => {
+        showMessage('✓ Link copied to clipboard!', 'success');
+    }).catch(() => {
+        showMessage('✗ Failed to copy link', 'error');
+    });
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('qrModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
 // Register a new team
 async function registerTeam() {
     const form = document.getElementById('teamForm');
@@ -57,7 +113,7 @@ async function loadTeams() {
         const teamsList = document.getElementById('teamsList');
 
         if (result.teams.length === 0) {
-            teamsList.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No teams registered yet.</p>';
+            teamsList.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999; padding: 40px 20px;">No teams registered yet. Be the first to register!</p>';
             return;
         }
 
@@ -88,8 +144,8 @@ function createTeamCard(team) {
         ${team.website ? `<p><span class="label">Website:</span> <a href="${team.website}" target="_blank">${team.website}</a></p>` : ''}
         <p><span class="label">Registered:</span> ${team.registeredAt}</p>
         <div style="margin-top: 15px; display: flex; gap: 10px;">
-            <button onclick="editTeam(${team.id})" style="flex: 1; padding: 8px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
-            <button onclick="deleteTeam(${team.id})" style="flex: 1; padding: 8px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+            <button onclick="editTeam(${team.id})" style="flex: 1; padding: 8px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#5568d3'" onmouseout="this.style.background='#667eea'">✏️ Edit</button>
+            <button onclick="deleteTeam(${team.id})" style="flex: 1; padding: 8px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">🗑️ Delete</button>
         </div>
     `;
     return card;
